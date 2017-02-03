@@ -15,7 +15,6 @@ RUN apt-get update && \
 
 ADD squid.conf /etc/squid3/squid.conf
 ADD aa /etc/squid3/aa
-RUN chmod o+r /etc/squid3/aa
 RUN mkdir /var/cache/squid
 RUN chown -R proxy:proxy /var/cache/squid
 RUN /usr/sbin/squid3 -k parse
