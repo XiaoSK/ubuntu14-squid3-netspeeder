@@ -8,13 +8,13 @@ RUN apt-get update && \
 	apt-get clean  && \
 	apt-get install -y libnet1-dev libpcap0.8-dev && \
 	apt-get clean  && \
-    apt-get install -y git squid3 && \
+    apt-get install -y git squid && \
 	apt-get clean  && \
-    mv /etc/squid3/squid.conf /etc/squid3/squid.conf.dist && \
+    mv /etc/squid/squid.conf /etc/squid/squid.conf.dist && \
     apt-get clean
 
-ADD squid.conf /etc/squid3/squid.conf
-ADD aa /etc/squid3/aa
+ADD squid.conf /etc/squid/squid.conf
+ADD aa /etc/squid/aa
 RUN mkdir /var/cache/squid
 RUN chown -R proxy:proxy /var/cache/squid
 RUN /usr/sbin/squid3 -N -z -F
