@@ -1,4 +1,4 @@
-FROM ubuntu:16.04.1
+FROM ubuntu:latest
 
 MAINTAINER ceker
 
