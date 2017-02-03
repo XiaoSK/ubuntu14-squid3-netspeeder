@@ -1,7 +1,7 @@
-# squid-net-speeder
+FROM ubuntu:16.04.1
 
-FROM ubuntu:14.04.3
-MAINTAINER malaohu <tua@live.cn>
+MAINTAINER ceker
+
 RUN apt-get update && \
 	apt-get clean  && \
 	apt-get install libnet1 libpcap0.8  && \
