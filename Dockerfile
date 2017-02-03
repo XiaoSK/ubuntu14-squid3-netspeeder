@@ -17,7 +17,7 @@ ADD squid.conf /etc/squid/squid.conf
 ADD aa /etc/squid/aa
 RUN mkdir /var/cache/squid
 RUN chown -R proxy:proxy /var/cache/squid
-RUN /usr/sbin/squid3 -N -z -F
+RUN /usr/sbin/squid -N -z -F
 
 
 RUN git clone https://github.com/snooda/net-speeder.git net-speeder
