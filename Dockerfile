@@ -8,10 +8,12 @@ RUN apt-get update && \
 	apt-get clean  && \
 	apt-get install -y libnet1-dev libpcap0.8-dev && \
 	apt-get clean  && \
-    apt-get install -y git squid && \
+	apt-get install -y build-essential gcc && \
 	apt-get clean  && \
-    mv /etc/squid/squid.conf /etc/squid/squid.conf.dist && \
-    apt-get clean
+	apt-get install -y git squid && \
+	apt-get clean  && \
+	mv /etc/squid/squid.conf /etc/squid/squid.conf.dist && \
+	apt-get clean
 
 ADD squid.conf /etc/squid/squid.conf
 ADD aa /etc/squid/aa
