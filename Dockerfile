@@ -1,32 +1,22 @@
 FROM ubuntu:14.04.5
 
-MAINTAINER ceker
+MAINTAINER ceker "xsk.tehon.org"
 
 RUN apt-get update && \
-	apt-get clean && \
-	apt-get install libnet1 libpcap0.8 && \
-	apt-get clean && \
-	apt-get install -y libnet1-dev libpcap0.8-dev && \
-	apt-get clean && \
-	apt-get install -y git squid3 && \
-	apt-get clean && \
-	mv /etc/squid3/squid.conf /etc/squid3/squid.conf.dist && \
-	apt-get clean
-
+    apt-get install -y libnet1 libnet1-dev libpcap0.8 libpcap0.8-dev git apache2-utils squid3 && \
+    apt-get clean
+    
+RUN mv /etc/squid3/squid.conf /etc/squid3/squid.conf.dist && \
+    mkdir -p /var/cache/squid && \
+    chown -R proxy:proxy /var/cache/squid
 ADD squid.conf /etc/squid3/squid.conf
-ADD aa /etc/squid3/aa
-RUN mkdir /var/cache/squid
-RUN chown -R proxy:proxy /var/cache/squid
-RUN /usr/sbin/squid3 -N -z -F
 
 RUN git clone https://github.com/snooda/net-speeder.git net-speeder
 WORKDIR net-speeder
 RUN sh build.sh
 
-RUN mv net_speeder /usr/local/bin/
 COPY entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/net_speeder
+RUN chmod +x /usr/local/bin/entrypoint.sh && mv net_speeder /usr/local/bin/ && chmod +x /usr/local/bin/net_speeder
 
 EXPOSE 10101
 
