@@ -18,8 +18,8 @@ ADD aa /etc/squid3/aa
 RUN chmod o+r /etc/squid3/aa
 RUN mkdir /var/cache/squid
 RUN chown -R proxy:proxy /var/cache/squid
+RUN /usr/sbin/squid3 -k parse
 RUN /usr/sbin/squid3 -N -z -F
-
 
 RUN git clone https://github.com/snooda/net-speeder.git net-speeder
 WORKDIR net-speeder
@@ -32,5 +32,4 @@ RUN chmod +x /usr/local/bin/net_speeder
 
 EXPOSE 10101
 
-# Configure container to run as an executable
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
